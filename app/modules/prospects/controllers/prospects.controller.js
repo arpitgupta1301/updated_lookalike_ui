@@ -34,6 +34,58 @@
       _this.numberOfOpportunitiesEC = 0;
       _this.ecBarGraphLabels = [];
       _this.ecBarGraphCount = [];
+      _this.chartData = {
+        labels: ['Identified in lookalikes', 'Not Identified'],
+        options: {
+          plugins: {
+            datalabels: {
+              display: false
+            }
+          },
+          tooltips: {
+            enabled: true,
+            mode: 'single',
+            callbacks: {
+              label: function (tooltipItem, data) {
+                var label = data.labels[tooltipItem.index];
+                var datasetLabel = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                return datasetLabel + '%';
+              }
+            }
+          },
+          scaleShowGridLines: false,
+          scales: {
+            yAxes: [
+              {
+                scaleLabel: {
+                  display: true,
+                  labelString:
+                    'Number of bpns in %'
+                },
+                gridLines: {
+                  display: false
+                }
+              }
+            ],
+            xAxes: [
+              {
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Distribution'
+                },
+                gridLines: {
+                  display: false
+                }
+              }
+            ]
+          }
+        },
+        data: [
+          [Math.round(226 / 274 * 100), Math.round(48 / 274 * 100)]
+        ],
+        colors: _this.colors
+      };
+
 
       _this.getECBarGraphData = function (param) {
         $http
@@ -338,7 +390,7 @@
                 }
               }
             }
-	    for (var i = 0; i < _this.filterEOList.othersFilter.length; i++) {
+            for (var i = 0; i < _this.filterEOList.othersFilter.length; i++) {
               if (_this.filterEOList.othersFilter[i].isSelected) {
                 if (
                   _this.filterEOList.othersFilter[i].name ===
@@ -487,8 +539,8 @@
             var sampleDB = [];
             for (var i = 0; i < _this.filterDBList.sicFilter.length; i++) {
               if (_this.filterDBList.sicFilter[i].isSelected) {
-                  sampleDB.push(_this.filterDBList.sicFilter[i].name);
-               
+                sampleDB.push(_this.filterDBList.sicFilter[i].name);
+
               }
             }
             if (sampleDB.length > 0) {
@@ -503,16 +555,33 @@
         );
       };
 
+      _this.openChartModal = function () {
+        var modalInstance = $uibModal
+          .open({
+            templateUrl: 'modules/prospects/templates/chart.html',
+            controller: 'ChartController as chart',
+            resolve: {
+              itemResolve: function () {
+                return _this.chartData;
+              }
+            }
+          });
+        modalInstance.result.then(function () {
+        }, function () {
+        });
+      }
+
+
       _this.getDBBarGraphData(_this.filterDBParams);
 
       // DownloadCSV
-      _this.downloadCSV = function(type, filters) {
+      _this.downloadCSV = function (type, filters) {
         var name = type === 'existingCSeriesCustomers' ?
-         'csd' :
+          'csd' :
           type === 'currentCSeriesOpportunitiesInSFDC' ? 'opp' : 'dnb';
         var url = 'https://lookalike-service-temp2-dot-datatest-148118.appspot.com/getCSV/' + name;
         $http.post(url, filters).then(
-          function(response, status, headers, config) {
+          function (response, status, headers, config) {
             var blob = new Blob([response.data], {
               type: 'text/csv'
             });
@@ -528,7 +597,7 @@
               document.body.removeChild(elem);
             }
           },
-          function(data, status, headers, config) {
+          function (data, status, headers, config) {
             // alert('error');
           }
         );

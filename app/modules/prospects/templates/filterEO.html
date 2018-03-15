@@ -1,0 +1,93 @@
+<div class="modal-header">
+  <h3 class="modal-title">Filter</h3>
+</div>
+
+<div class="modal-body">
+  <div class="row">
+    <div class="col-md-12">
+      <br>
+        <b>Customer:</b>
+      <br>
+      <br>
+      <div ng-repeat="f in filter.filterList.otherFilter">
+        <div class="row" ng-if="$even">
+          <div class="col-md-6">
+            <div class="checkbox">
+              <label title="{{filter.filterList.otherFilter[$index   ].name}}">
+                    <input type="checkbox" ng-model="filter.filterList.otherFilter[$index   ].isSelected"> {{filter.filterList.otherFilter[$index   ].name}}
+                  </label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="checkbox">
+              <label title="{{filter.filterList.otherFilter[$index +1].name}}">
+                    <input type="checkbox" ng-model="filter.filterList.otherFilter[$index +1].isSelected"> {{filter.filterList.otherFilter[$index +1].name}}
+                  </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="col-md-12">
+      <br>
+        <b>Stage:</b>
+      <br>
+      <br>
+      <div ng-repeat="f in filter.filterList.othersFilter">
+        <div class="row" ng-if="$even">
+          <div class="col-md-6">
+            <div class="checkbox">
+              <label title="{{filter.filterList.othersFilter[$index   ].name}}">
+                    <input type="checkbox" ng-model="filter.filterList.othersFilter[$index   ].isSelected"> {{filter.filterList.othersFilter[$index   ].name}}
+                  </label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="checkbox">
+              <label title="{{filter.filterList.othersFilter[$index +1].name}}">
+                    <input type="checkbox" ng-model="filter.filterList.othersFilter[$index +1].isSelected"> {{filter.filterList.othersFilter[$index +1].name}}
+                  </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="col-md-12">
+      <br>
+        <b>SIC Category:</b>
+      <br>
+      <br>
+      <div ng-repeat="f in filter.filterList.sicFilter">
+        <div class="row" ng-if="$even">
+          <div class="col-md-6">
+            <div class="checkbox">
+              <label title="{{filter.filterList.sicFilter[$index   ].name}}">
+                  <input type="checkbox" ng-model="filter.filterList.sicFilter[$index   ].isSelected"> {{filter.filterList.sicFilter[$index   ].name}}
+                </label>
+            </div>
+          </div>
+          <div class="col-md-6" ng-if="$index < 8">
+            <div class="checkbox">
+              <label title="{{filter.filterList.sicFilter[$index +1].name}}">
+                  <input type="checkbox" ng-model="filter.filterList.sicFilter[$index +1].isSelected"> {{filter.filterList.sicFilter[$index +1].name}}
+                </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button ng-click="filter.apply()" class="btn btn-primary">
+      Apply
+    </button>
+  <button class="btn btn-default" class="btn" ng-click="filter.close()">
+      Cancel
+    </button>
+</div>

@@ -81,7 +81,7 @@
           }
         },
         data: [
-          [Math.round(226 / 274 * 100), Math.round(48 / 274 * 100)]
+          [Math.round(238 / 297 * 100), Math.round(59 / 297 * 100)]
         ],
         colors: _this.colors
       };

@@ -64,6 +64,10 @@
                 },
                 gridLines: {
                   display: false
+                },
+                ticks: {
+                  suggestedMin: 0,
+                  beginAtZero: true
                 }
               }
             ],
@@ -157,6 +161,10 @@
                   },
                   gridLines: {
                     display: false
+                  },
+                  ticks: {
+                    suggestedMin: 0,
+                    beginAtZero: true
                   }
                 }
               ],
@@ -316,6 +324,10 @@
                   },
                   gridLines: {
                     display: false
+                  },
+                  ticks: {
+                    suggestedMin: 0,
+                    beginAtZero: true
                   }
                 }
               ],
@@ -494,6 +506,10 @@
                   },
                   gridLines: {
                     display: false
+                  },
+                  ticks: {
+                    suggestedMin: 0,
+                    beginAtZero: true
                   }
                 }
               ],
